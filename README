@@ -1,0 +1,35 @@
+KTACMD
+jordan@cosmicpenguin.net
+
+'ktacmd' is a command line program for controlling a KTA-223 USB/RS485 Relay IO Board
+from Ocean Controls (oceancontrols.com.au).  I got mine from Sparkfun:
+http://www.sparkfun.com/products/9526.  The KTA-223 has 8 output relays, 4 analog inputs
+and 4 digital inputs useful for many nefarious purposes.
+
+The KTA-223 uses a FTDI USB controller to set up a serial port, so make sure you have
+the FTDI driver loaded and working (it come standard with Ubuntu and most other
+reasonably new distributions.  In 99% of the cases, if you plug in the controller USB
+controller, stuff just works.  If it doesn't, google ftdi and do what it says).
+
+There are three commands for ktacmd:
+
+./ktacmd status <n> - return the status of the relay. N can be a number between 0 and 8.
+Specify no number or 0 to see the status of all 8 relays, any other number shows just
+the status of that relay.
+
+./ktacmd on <n> - turn on a relay, N can be an number between 1 and 8.  Note that the
+KTA-223 does have a command to turn on all relays at the same time - that is purposely
+not supported here to avoid accidently turning them all on and blowing someting out.
+
+./ktacmd off <n> - turn off a relay.  N can be a number between 1 and 8.  Specify no
+number of 0 to turn all relays off at the same time.
+
+Todo:
+
+Lots of things left to do, this is a partial list:
+
+* Add commands for input status
+* Ccontrollable addressing
+* Specify serial port via cmdline and config file
+* Turn on multiple relays with the WR command
+* Autotools so that it can be compiled for other architectures (ARM)
